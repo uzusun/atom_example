@@ -1,0 +1,6 @@
+hoge=fuga
+foo=bar
+
+
+docker run --rm -p 4567:4567 -w /usr/src/app ruby \
+bash -c "bundle install && bundle exec ruby app.rb -o 0.0.0.0"
