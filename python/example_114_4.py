@@ -1,4 +1,3 @@
-
 #한글 깨짐 보정
 import sys
 import io
