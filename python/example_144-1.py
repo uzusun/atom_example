@@ -7,6 +7,13 @@ for item in drink_data.keys():
     print(str(item) + ":" + str(drink_data[item]))
 
 product = input("Input drink name?(Drink name) ")
+while(1):
+    if product not in drink_data.keys():
+        print("Not provided")
+        product = input("what do you want?(Drink name) ")
+    else:
+        break
+        
 money = input("Input price? ")
 
 calc = caculate(product, int(money))
