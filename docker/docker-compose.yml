@@ -23,8 +23,8 @@ services:
       - postgres-server
     volumes:  # Volumes for scripts and related files you can add
       - /usr/lib/zabbix/alertscripts:/usr/lib/zabbix/alertscripts
-  
-  zabbix-web:    # The main Zabbix web UI or interface 
+
+  zabbix-web:    # The main Zabbix web UI or interface
     image: zabbix/zabbix-web-nginx-pgsql:ubuntu-latest
     restart: always
     environment:  # Postgre database variables
@@ -33,7 +33,7 @@ services:
       POSTGRES_DB: zabbix
       ZBX_SERVER_HOST: zabbix-server  # Zabbix related and Php variables
       ZBX_POSTMAXSIZE: 64M
-      PHP_TZ: "Asia/Kolkata"  
+      PHP_TZ: "Asia/Seoul"  
       ZBX_MAXEXECUTIONTIME: 500
     depends_on:
       - postgres-server
@@ -52,7 +52,7 @@ services:
     restart: always
     ports:
       - 8080:8080
-  grafana-xxl:  #optional more functional and creative UI 
+  grafana-xxl:  #optional more functional and creative UI
     image: monitoringartist/grafana-xxl:latest
     ports:
      - 3000:3000
