@@ -1,0 +1,46 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+  #===============#
+  # Zabbix Server #
+  #===============#
+  config.vm.define "zabbix-dbsvr" do |cfg|
+    cfg.vm.box = "centos/7"
+    cfg.vm.provider "virtualbox" do |vb|
+      vb.name = "zabbix-dbsvr"
+    end
+    cfg.vm.host_name = "zabbix-dbsvr"
+    cfg.vm.network "public_network", ip: "192.168.0.230"
+    cfg.vm.network "forwarded_port", guest: 22, host: 60011, auto_correct: true, id: "ssh"
+    cfg.vm.provision "shell", path: "bash_ssh_conf_4_CentOS.sh"
+  end
+
+  config.vm.define "zabbix-svr" do |cfg|
+    cfg.vm.box = "centos/7"
+    cfg.vm.provider "virtualbox" do |vb|
+      vb.name = "zabbix-svr"
+    end
+    cfg.vm.host_name = "zabbix-svr"
+    cfg.vm.network "public_network", ip: "192.168.0.231"
+    cfg.vm.network "forwarded_port", guest: 22, host: 60012, auto_correct: true, id: "ssh"
+    cfg.vm.provision "shell", path: "bash_ssh_conf_4_CentOS.sh"
+  end
+
+  #================#
+  # Ansible Server #
+  #================#
+  config.vm.define "ansible-server" do |cfg|
+    cfg.vm.box = "centos/7"
+    cfg.vm.provider "virtualbox" do |vb|
+      vb.name = "ansible-server"
+    end
+    cfg.vm.host_name = "ansible-server"
+    cfg.vm.network "public_network", ip: "192.168.0.150"
+    cfg.vm.network "forwarded_port", guest: 22, host: 60010, auto_correct: true, id: "ssh"
+#    cfg.vm.synced_folder ".", "/vagrant"
+    cfg.vm.provision "shell", inline: "yum install ansible -y"
+    cfg.vm.provision "file", source: "ansible_env_ready.yml", destination: "ansible_env_ready.yml" # copy file
+    cfg.vm.provision "shell", inline: "ansible-playbook ansible_env_ready.yml" # run script in guest
+  end
+end
