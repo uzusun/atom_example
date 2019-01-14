@@ -1,0 +1,43 @@
+---
+- name: install package for zabbixsvr
+  hosts: zabbixsvr
+  gather_facts: no
+  become: yes
+
+  tasks:
+    - name: upgrade all packages, excluding kernel & foo related packages
+      yum:
+        name: '*'
+        state: latest
+        exclude: kernel*,foo*
+    - name: install the 'Development tools' package group
+        yum:
+        name: "@Development tools"
+        state: present
+    - name: install package for zabbixsvr
+      yum: name="{{ item }}" state=present
+      with_items:
+        - zlib-devel
+        - mysql-devel
+        - glibc-devel
+        - curl-devel
+        - libidn-devel
+        - openssl-devel
+        - net-snmp-devel
+        - popt-devel
+        - rpm-devel
+        - OpenIPMI-devel
+        - libssh2-devel
+        - libxm2-devel
+        - unixODBC-devel
+
+- name: install package for zabbixdbsvr
+  hosts: zabbixdbsvr
+  gather_facts: no
+  become: yes
+
+  tasks:
+    - name: install the 'Development tools' package group
+      yum:
+        name: "@Development tools"
+        state: present
