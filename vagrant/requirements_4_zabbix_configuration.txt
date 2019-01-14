@@ -1,0 +1,37 @@
+# Frontend side
+Apache
+PHP
+gd
+bcmath
+ctype
+libXML
+xmlreader
+xmlwriter
+session
+sockets
+mbstring
+gettext
+ldap
+mysqli
+
+# Server side
+libpcre	  
+libevent    Required for bulk metric support and IPMI monitoring. Version 1.4 or higher.
+OpenIPMI    Optional	Required for IPMI support.
+libssh2     Required for SSH support. Version 1.0 or higher.
+fping     	Required for ICMP ping items.
+libcurl    	Required for web monitoring, VMware monitoring and SMTP authentication. For SMTP authentication, version 7.20.0 or higher is required. Also required for Elasticsearch.
+libiksemel	Required for Jabber support.
+libxml2    	Required for VMware monitoring.
+net-snmp  	Required for SNMP support.
+
+
+# database
+# Variables
+DBHOST=192.168.0.230
+DBNAME=zabbix
+DBUSER=zabbix
+DBPASSWD=zabbix
+
+mysql -uroot -p$DBPASSWD -e "CREATE DATABASE $DBNAME"
+mysql -uroot -p$DBPASSWD -e "grant all privileges on $DBNAME.* to '$DBUSER'@'$DBHOST' identified by '$DBPASSWD'" 
