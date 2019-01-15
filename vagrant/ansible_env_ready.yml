@@ -15,6 +15,11 @@
           192.168.0.230
           [zabbixsvr]
           192.168.0.231
+
+    - name: Install sshpass for Authentication
+      yum:
+        name: sshpass
+        state: present
     - name: Create vim env's directories & files
       shell: "{{ item }}" # with_items 에 있는 내용을 읽어서 실행
       with_items:

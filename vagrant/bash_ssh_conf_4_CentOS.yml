@@ -11,11 +11,11 @@
         state: latest
         exclude: kernel*,foo*
     - name: install the 'Development tools' package group
-        yum:
+      yum:
         name: "@Development tools"
         state: present
     - name: install package for zabbixsvr
-      yum: name="{{ item }}" state=present
+      yum: name="{{item}}" state=latest
       with_items:
         - zlib-devel
         - mysql-devel
