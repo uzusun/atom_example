@@ -15,21 +15,22 @@
         name: "@Development tools"
         state: present
     - name: install package for zabbixsvr
-      yum: name="{{item}}" state=latest
-      with_items:
-        - zlib-devel
-        - mysql-devel
-        - glibc-devel
-        - curl-devel
-        - libidn-devel
-        - openssl-devel
-        - net-snmp-devel
-        - popt-devel
-        - rpm-devel
-        - OpenIPMI-devel
-        - libssh2-devel
-        - libxm2-devel
-        - unixODBC-devel
+      yum:
+        name:
+          - zlib-devel
+          - mysql-devel
+          - glibc-devel
+          - curl-devel
+          - libidn-devel
+          - openssl-devel
+          - net-snmp-devel
+          - popt-devel
+          - rpm-devel
+          - OpenIPMI-devel
+          - libssh2-devel
+          - libxm2-devel
+          - unixODBC-devel
+        state: present
 
 - name: install package for zabbixdbsvr
   hosts: zabbixdbsvr

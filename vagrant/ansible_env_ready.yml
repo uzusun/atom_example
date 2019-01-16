@@ -8,18 +8,21 @@
       blockinfile:
         path: /etc/ansible/hosts
         block: |
-          [CentOS]
-          192.168.0.230
-          192.168.0.231
+          [nodes]
+          192.168.0.[230:231]
           [zabbixdbsvr]
           192.168.0.230
           [zabbixsvr]
           192.168.0.231
 
-    - name: Install sshpass for Authentication
-      yum:
-        name: sshpass
-        state: present
+#    - name: Gemerate sshkey
+#      become: yes
+#      become_user: vagrant
+#      shell: "{{item}}"
+#      with_items:
+#        - "ssh-keyscan 192.168.0.230 >> ~/.ssh/known_hosts"
+#        - "ssh-keyscan 192.168.0.231 >> ~/.ssh/known_hosts"
+
     - name: Create vim env's directories & files
       shell: "{{ item }}" # with_items 에 있는 내용을 읽어서 실행
       with_items:
