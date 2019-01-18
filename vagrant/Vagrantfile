@@ -38,7 +38,7 @@ Vagrant.configure("2") do |config|
     cfg.vm.host_name = "ansible-server"
     cfg.vm.network "public_network", ip: "192.168.0.150"
     cfg.vm.network "forwarded_port", guest: 22, host: 60010, auto_correct: true, id: "ssh"
-#    cfg.vm.synced_folder ".", "/vagrant"
+    cfg.vm.synced_folder ".", "/vagrant"
     cfg.vm.provision "shell", inline: "yum install epel-release -y"
     cfg.vm.provision "shell", inline: "yum install ansible -y"
     cfg.vm.provision "file", source: "ansible_env_ready.yml", destination: "ansible_env_ready.yml" # copy file

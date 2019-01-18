@@ -1,0 +1,12 @@
+---
+- name: install nginx on the nodes
+  hosts: nodes
+  become: yes
+
+  tasks:
+    - name: nginx for any Linux
+      include_tasks: "{{ lnx_name }}.yml"
+
+  handlers:
+    - name: restart nginx web server
+      service: name=nginx state=restarted
